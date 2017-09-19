@@ -1,0 +1,39 @@
+{
+    "name": "MartinMulder/ssllabs-api-laravel",
+    "description": "SSLLabs integrtion for Laravel.",
+    "keywords": ["ssllabs", "api", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0",
+	"andyftw/ssllabs-php": "^1.2",
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.6",
+        "orchestra/testbench": "~3.2"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "autoload": {
+        "psr-4": {
+            "SSLLabs\\Laravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SSLLabs\\Laravel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SSLLabs\\Laravel\\SsllabsServiceProvider"
+            ],
+            "aliases": {
+                "SSLLabs": "SSLLabs\\Laravel\\Facades\\SSLLabs"
+            }
+        }
+    }
+}
