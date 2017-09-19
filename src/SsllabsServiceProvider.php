@@ -63,6 +63,7 @@ class SsllabsServiceProvider extends ServiceProvider
      */
     protected function newSSLLabs()
     {
+	\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
         return new Andyftw\SSLLabs\Api();
     }
 }
