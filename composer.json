@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
-	"andyftw/ssllabs-php": "^1.2",
+	"andyftw/ssllabs-php": "^1.2"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
