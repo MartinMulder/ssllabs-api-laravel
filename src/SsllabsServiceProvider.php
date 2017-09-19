@@ -63,6 +63,6 @@ class SsllabsServiceProvider extends ServiceProvider
      */
     protected function newSSLLabs()
     {
-        return new AndyFtw\SSLLabs\Api();
+        return new Andyftw\SSLLabs\Api();
     }
 }
