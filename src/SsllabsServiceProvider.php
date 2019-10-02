@@ -44,7 +44,7 @@ class SsllabsServiceProvider extends ServiceProvider
         });
         // Bind the SSLLabs contract to the SslLabs object
         // in the IoC for dependency injection.
-        //$this->app->singleton(SSLLabsInterface::class, 'ssllabs');
+        $this->app->bind(SSLLabsInterface::class, 'ssllabs');
     }
 
     /**

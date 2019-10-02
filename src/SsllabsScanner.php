@@ -19,6 +19,7 @@ class SsllabsScanner
 
     public function __construct(Api $ssllabsApi)
     {
+    	Log::debug('Constructing ssllabsscanner');
     	$this->ssllabsApi = $ssllabsApi;
     } 
 
