@@ -6,6 +6,7 @@ namespace SSLLabs\Laravel;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use SSLLabs\Laravel\SsllabsScanner;
 use SSLLabs\SSLLabs\Api;
 
 class SsllabsServiceProvider extends ServiceProvider
@@ -32,7 +33,7 @@ class SsllabsServiceProvider extends ServiceProvider
     public function register()
     {
         // Bind the SSLLabs instance to the IoC
-        $this->app->singleton('ssllabs', function (Container $app) {
+        $this->app->bind('ssllabs', function (Container $app) {
             $config = $app->make('config')->get('ssllabs');
             // Verify configuration exists.
             if (is_null($config)) {
@@ -43,7 +44,7 @@ class SsllabsServiceProvider extends ServiceProvider
         });
         // Bind the SSLLabs contract to the SslLabs object
         // in the IoC for dependency injection.
-        $this->app->singleton(SSLLabsInterface::class, 'ssllabs');
+        //$this->app->singleton(SSLLabsInterface::class, 'ssllabs');
     }
 
     /**
@@ -64,6 +65,7 @@ class SsllabsServiceProvider extends ServiceProvider
     protected function newSSLLabs()
     {
 	\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
-        return new Andyftw\SSLLabs\Api();
+        $api = new Andyftw\SSLLabs\Api();
+        return new SsllabsScanner($api);
     }
 }
