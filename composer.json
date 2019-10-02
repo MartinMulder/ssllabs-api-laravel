@@ -1,5 +1,5 @@
 {
-    "name": "MartinMulder/ssllabs-api-laravel",
+    "name": "martinmulder/ssllabs-api-laravel",
     "description": "SSLLabs integrtion for Laravel.",
     "keywords": ["ssllabs", "api", "laravel"],
     "license": "MIT",
