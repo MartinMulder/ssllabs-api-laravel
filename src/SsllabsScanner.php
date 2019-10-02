@@ -29,26 +29,32 @@ class SsllabsScanner
     	try {
 	    	// analyze($host, $publish, $startNew, $fromCache, $maxAge, $all, $ignoreMismatch )
 	    	// @see: https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md#invoke-assessment-and-check-progress
-	    	$this->ssllabsApi::analyze($url, false, true, false, 0);
+	    	$this->ssllabsApi->analyze($url, false, true, false, 0);
 	        
 	    	// Give SSL ten seconds to start
 	        sleep(10);
+		
+	        while ($this->state != 'READY' && $t <= $this->maxTries) {
+			// Fetch data from api
+			$host = $this->ssllabsApi->analyze($url);
+			$currentStatus = $host->getStatus();
+			$currentMessage = $host->getStatusMessage();
 
-	        $currentState = $this->ssllabsApi::analyze($url)->getStatus();
-	        while ($currentState != 'READY') {
+			foreach($host->getEndpoints() as $endpoint) {
+				Log::debug('endpoint: ' . $endpoint->getIpAddress() . ' status details: ' . $endpoint->getStatusDetails());
+			}
 	        	// update the current state
-	        	$this->state = $currentState;
+	        	$this->state = $currentStatus;
 	        	// SSLLabs isn't ready
 	            sleep(5);
 	        }
 
 	        // update the current state
-	        $this->state = $currentState;
-	        $this->result = $this->api::analyze($url);
-	        
+	        $this->state = $currentStatus;
+	        $this->result = $this->ssllabsApi->analyze($url);
 	        return $this->result;
 	    } catch(\Exception $e) {
-	    	Log::error('SSL scan error for url: ' . $url . " message: " . $e->getrMessage());
+	    	Log::error('SSL scan error for url: ' . $url . " message: " . $e->getMessage());
 	    	$this->state = "FAILED";
 	    	return false;
 	    }
