@@ -35,18 +35,18 @@ class SsllabsScanner
 	        sleep(10);
 		
 	        while ($this->state != 'READY') {
-			// Fetch data from api
-			$host = $this->ssllabsApi->analyze($url);
-			$currentStatus = $host->getStatus();
-			$currentMessage = $host->getStatusMessage();
+				// Fetch data from api
+				$host = $this->ssllabsApi->analyze($url);
+				$currentStatus = $host->getStatus();
+				$currentMessage = $host->getStatusMessage();
 
-			foreach($host->getEndpoints() as $endpoint) {
-				Log::debug('endpoint: ' . $endpoint->getIpAddress() . ' status details: ' . $endpoint->getStatusDetails());
-			}
-	        	// update the current state
-	        	$this->state = $currentStatus;
-	        	// SSLLabs isn't ready
-	            sleep(5);
+				foreach($host->getEndpoints() as $endpoint) {
+					Log::debug('endpoint: ' . $endpoint->getIpAddress() . ' status details: ' . $endpoint->getStatusDetails());
+				}
+		        	// update the current state
+		        	$this->state = $currentStatus;
+		        	// SSLLabs isn't ready
+		            sleep(10);
 	        }
 
 	        // update the current state
