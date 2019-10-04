@@ -62,7 +62,7 @@ class SsllabsScanner
 
     public function endpointData($url, $endpoint)
     {
-    	return $this->ssllabsApi->getEndpointData($url, $endpoint)''
+    	return $this->ssllabsApi->getEndpointData($url, $endpoint);
     }
 
     public function getState()
