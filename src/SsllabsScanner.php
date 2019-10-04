@@ -34,7 +34,7 @@ class SsllabsScanner
 	    	// Give SSL ten seconds to start
 	        sleep(10);
 		
-	        while ($this->state != 'READY' && $t <= $this->maxTries) {
+	        while ($this->state != 'READY') {
 			// Fetch data from api
 			$host = $this->ssllabsApi->analyze($url);
 			$currentStatus = $host->getStatus();
